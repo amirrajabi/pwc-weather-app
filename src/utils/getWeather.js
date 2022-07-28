@@ -1,7 +1,7 @@
-import IpFetcher from "../api/ipfetcher";
-import IpGeoLocation from "../api/ipGeoLocation";
-import CityLocation from "../api/cityLocation";
-import ForeCastAPI from "../api/foreCastAPI";
+import IpFetcher from '../api/ipfetcher';
+import IpGeoLocation from '../api/ipGeoLocation';
+import CityLocation from '../api/cityLocation';
+import ForeCastAPI from '../api/foreCastAPI';
 
 class GetWeather {
   constructor() {
@@ -9,7 +9,7 @@ class GetWeather {
     this.ipGeoLocation = new IpGeoLocation();
     this.cityLocation = new CityLocation();
     this.foreCastAPI = new ForeCastAPI();
-    this.cityName = "";
+    this.cityName = '';
   }
 
   async fetch(cityName) {
@@ -18,14 +18,16 @@ class GetWeather {
       await this.ipFetcher.fetch();
       await this.ipGeoLocation.fetch(this.ipFetcher.ip);
       const city =
-        this.cityName !== "" ? this.cityName : this.ipGeoLocation.data.city;
+        this.cityName !== ''
+          ? this.cityName
+          : this.ipGeoLocation.data.data.geo.city;
       await this.cityLocation.fetch(city);
       const latitude = this.cityLocation.data.results[0].geometry.lat;
       const longitude = this.cityLocation.data.results[0].geometry.lng;
       await this.foreCastAPI.fetch(latitude, longitude);
       this.data = {
         city,
-        ...this.foreCastAPI.data
+        ...this.foreCastAPI.data,
       };
       // Keep console for monitoring all data
       console.table(this.data);
