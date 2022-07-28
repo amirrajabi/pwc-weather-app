@@ -1,17 +1,17 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 
-import weekdays from "../../utils/weekdays";
-import timeConvert from "../../utils/time";
-import { icons } from "../../utils/icons";
+import weekdays from '../../utils/weekdays';
+import timeConvert from '../../utils/time';
+import { icons } from '../../utils/icons';
 
-import { useStyles } from "./WeekDays.styles";
+import { useStyles } from './WeekDays.styles';
 
 WeekDays.prototype = {
-  days: PropTypes.array.isRequired
+  days: PropTypes.array.isRequired,
 };
 
 WeekDays.defaultProps = {};
@@ -19,7 +19,7 @@ WeekDays.defaultProps = {};
 export default function WeekDays({ days }) {
   const classes = useStyles();
 
-  const MaxMin = degree => {
+  const MaxMin = (degree) => {
     return (
       <div>
         <Typography className={classes.pos}>
@@ -27,10 +27,10 @@ export default function WeekDays({ days }) {
         </Typography>
         <div className={classes.degree}>
           <span className={classes.degreeDot}>
-            <Typography variant="srOnly">degree</Typography>
+            <Typography variant='srOnly'>degree</Typography>
           </span>
           <span className={classes.degreeLetter}>
-            <Typography variant="srOnly">celsius</Typography>
+            <Typography variant='srOnly'>celsius</Typography>
             <span aria-hidden={true}>C</span>
           </span>
         </div>
@@ -40,7 +40,7 @@ export default function WeekDays({ days }) {
 
   return (
     <div className={classes.days}>
-      {days.slice(2, 8).map(item => (
+      {days.slice(2, 8).map((item) => (
         <Card key={item.time} className={classes.card}>
           <CardContent>
             <img
@@ -48,13 +48,13 @@ export default function WeekDays({ days }) {
               src={icons[item.icon]}
               className={classes.icon}
             />
-            <Typography variant="srOnly">max temperature</Typography>
+            <Typography variant='srOnly'>max temperature</Typography>
             {MaxMin(item.temperatureMax)}
-            <Typography variant="srOnly">min temperature</Typography>
+            <Typography variant='srOnly'>min temperature</Typography>
             {MaxMin(item.temperatureMin)}
             <Typography
               className={classes.title}
-              color="textSecondary"
+              color='textSecondary'
               gutterBottom
             >
               {weekdays(timeConvert(item.time).weekDay)}
